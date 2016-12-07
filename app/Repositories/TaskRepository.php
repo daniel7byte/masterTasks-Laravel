@@ -7,7 +7,7 @@ use App\Task;
 
 class TaskRepository
 {
-    public function forUser(User $user)
+    public function forTasks(User $user)
     {
         if($user->role === "ADMIN"){
             return Task::all();
@@ -16,5 +16,11 @@ class TaskRepository
                 ->orderBy('created_at', 'des')
                 ->get();
         }
+    }
+
+    public function forUser(User $user)
+    {
+        return User::where('id', $user->id)
+            ->get();
     }
 }

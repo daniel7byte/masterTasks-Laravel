@@ -13,6 +13,9 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Description</th>
+                                    @if (Auth::user()->role === "ADMIN")
+                                        <th>User</th>
+                                    @endif
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -22,6 +25,9 @@
                                         <tr>
                                             <td>{{ $task->title }}</td>
                                             <td>{{ $task->description }}</td>
+                                            @if (Auth::user()->role === "ADMIN")
+                                                <td>{{ $task->user_id }}</td>
+                                            @endif
                                             <td>
                                                 {{ link_to_route('tasks.edit', $title = 'Edit', $parameter = $task, $attributes = ['class' => 'btn btn-xs btn-primary']) }}
                                                 @include('tasks.delete')
