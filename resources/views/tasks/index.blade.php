@@ -26,7 +26,7 @@
                                             <td>{{ $task->title }}</td>
                                             <td>{{ $task->description }}</td>
                                             @if (Auth::user()->role === "ADMIN")
-                                                <td>{{ $task->user_id }}</td>
+                                                <td>{{ $task->user->first_name }}</td>
                                             @endif
                                             <td>
                                                 {{ link_to_route('tasks.edit', $title = 'Edit', $parameter = $task, $attributes = ['class' => 'btn btn-xs btn-primary']) }}
