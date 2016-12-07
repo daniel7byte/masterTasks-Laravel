@@ -18,3 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::resource('tasks', 'TaskController');
+
+Route::get('/api/tasks', 'APIController@tasks');
+Route::get('/api/users', 'APIController@users');
