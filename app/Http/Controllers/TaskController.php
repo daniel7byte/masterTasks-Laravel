@@ -45,7 +45,7 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, TaskRequest $request)
+    public function store(TaskRequest $request)
     {
         $request->user()->tasks()->create($request->all());
         return redirect('/tasks')->with('success', 'Task Created');
