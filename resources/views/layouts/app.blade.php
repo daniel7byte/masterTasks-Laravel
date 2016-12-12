@@ -19,6 +19,7 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <script src="/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -87,5 +88,6 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="/js/jquery.elevatezoom.js"></script>
 </body>
 </html>

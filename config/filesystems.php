@@ -43,6 +43,11 @@ return [
 
     'disks' => [
 
+        'imagesTasks' => [
+            'driver' => 'local',
+            'root' => public_path().'/imagesTasks',
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),

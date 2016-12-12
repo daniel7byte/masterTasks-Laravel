@@ -13,6 +13,8 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Image</th>
                                     @if (Auth::user()->role === "ADMIN")
                                         <th>User</th>
                                     @endif
@@ -25,6 +27,14 @@
                                         <tr>
                                             <td>{{ $task->title }}</td>
                                             <td>{{ $task->description }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($task->date)->toDayDateTimeString() }}</td>
+                                            <td>
+                                                @if ($task->image == null)
+                                                    <span class="label label-warning">NULL</span>
+                                                @else
+                                                    <img style="max-height: 100px" class="img img-responsive img-thumbnail" src="imagesTasks/{{ $task->image }}">
+                                                @endif
+                                            </td>
                                             @if (Auth::user()->role === "ADMIN")
                                                 <td>{{ $task->user->first_name }}</td>
                                             @endif
@@ -42,4 +52,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".img").elevateZoom();
+        });
+    </script>
+
 @endsection

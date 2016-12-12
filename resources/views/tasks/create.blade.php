@@ -9,9 +9,14 @@
                     <div class="panel-heading">Create Task</div>
 
                     <div class="panel-body">
-                        {!! Form::open(['route' => 'tasks.store', 'method' => 'POST']) !!}
+                        {!! Form::open(['route' => 'tasks.store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
 
                             @include('tasks.form')
+
+                            <div class="form-group">
+                                {!! Form::label('date', 'Date: ') !!}
+                                <input type="datetime-local" class="form-control" id="date" name="date" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}T{{ \Carbon\Carbon::now()->format('h:i') }}">
+                            </div>
 
                             {!! Form::submit('Save', ['class' => 'btn btn-success']) !!}
 
