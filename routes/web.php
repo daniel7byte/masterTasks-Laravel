@@ -19,7 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::resource('tasks', 'TaskController');
+Route::get('/news', 'HomeController@news');
 
-Route::get('/api/tasks', 'APIController@tasks');
-Route::get('/api/users', 'APIController@users');
+Route::resource('tasks', 'TaskController');

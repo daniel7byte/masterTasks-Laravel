@@ -18,6 +18,11 @@ class TaskRepository
         }
     }
 
+    public function forTasksNews()
+    {
+        return Task::all()->sortByDesc('created_at');
+    }
+
     public function forUser(User $user)
     {
         return User::where('id', $user->id)

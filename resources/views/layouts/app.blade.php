@@ -46,7 +46,8 @@
                     @if (!Auth::guest())
                         <!-- Left Side Of Navbar -->
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="{{ url('/tasks') }}">Home <span class="sr-only">(current)</span></a></li>
+                            <li class="active"><a href="{{ url('/news') }}">Last News</a></li>
+                                <li><a href="{{ url('/tasks') }}">My Tasks</a></li>
                             <li><a href="{{ url('/tasks/create') }}">Create Task</a></li>
                         </ul>
                     @endif

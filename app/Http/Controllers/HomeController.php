@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Repositories\TaskRepository;
 
 class HomeController extends Controller
 {
@@ -11,11 +11,13 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    protected $tasks;
+
+    public function __construct(TaskRepository $task)
     {
         $this->middleware('auth');
+        $this->tasks = $task;
     }
-
     /**
      * Show the application dashboard.
      *
@@ -24,5 +26,12 @@ class HomeController extends Controller
     public function index()
     {
         return redirect('/tasks', 301);
+    }
+
+    public function news()
+    {
+        return view('news', [
+            'tasks' => $this->tasks->forTasksNews()
+        ]);
     }
 }

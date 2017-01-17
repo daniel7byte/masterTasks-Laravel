@@ -18,6 +18,7 @@
                                     @if (Auth::user()->role === "ADMIN")
                                         <th>User</th>
                                     @endif
+                                    <th>Created ago</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -38,6 +39,7 @@
                                             @if (Auth::user()->role === "ADMIN")
                                                 <td>{{ $task->user->first_name }}</td>
                                             @endif
+                                            <td>{{ \Carbon\Carbon::parse($task->created_at)->diffForHumans() }}</td>
                                             <td>
                                                 {{ link_to_route('tasks.edit', $title = 'Edit', $parameter = $task, $attributes = ['class' => 'btn btn-xs btn-primary']) }}
                                                 @include('tasks.delete')
