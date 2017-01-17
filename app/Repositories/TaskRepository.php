@@ -10,7 +10,7 @@ class TaskRepository
     public function forTasks(User $user)
     {
         if($user->role === "ADMIN"){
-            return Task::all();
+            return Task::all()->sortByDesc('created_at');
         }else{
             return Task::where('user_id', $user->id)
                 ->orderBy('created_at', 'des')

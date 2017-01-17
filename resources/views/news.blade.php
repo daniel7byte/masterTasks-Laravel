@@ -22,12 +22,6 @@
                                             <p>Date: {{ \Carbon\Carbon::parse($task->date)->toDayDateTimeString() }}</p>
                                             <p>User: <span class="label label-default">{{ $task->user->first_name }}</span></p>
                                             <p>Created ago: {{ \Carbon\Carbon::parse($task->created_at)->diffForHumans() }}</p>
-                                            @can('owner', $task)
-                                                <p>
-                                                    {{ link_to_route('tasks.edit', $title = 'Edit', $parameter = $task, $attributes = ['class' => 'btn btn-xs btn-primary']) }}
-                                                    @include('tasks.delete')
-                                                </p>
-                                            @endcan
                                         </div>
                                     </div>
                                 </div>

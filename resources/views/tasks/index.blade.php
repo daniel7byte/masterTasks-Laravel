@@ -37,7 +37,7 @@
                                                 @endif
                                             </td>
                                             @if (Auth::user()->role === "ADMIN")
-                                                <td>{{ $task->user->first_name }}</td>
+                                                <td><span class="label label-default">{{ $task->user->first_name }}</span></td>
                                             @endif
                                             <td>{{ \Carbon\Carbon::parse($task->created_at)->diffForHumans() }}</td>
                                             <td>
