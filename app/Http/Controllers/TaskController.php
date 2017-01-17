@@ -61,7 +61,7 @@ class TaskController extends Controller
 
         if($img != null){
             $file_route = time() . '_' . $img->getClientOriginalName();
-            Storage::disk('imagesTasks')->put($file_route, file_get_contents($img->getRealPath()));
+            Storage::disk('imagesTasks')->put($file_route, \File::get($img));
             $task->image = $file_route;
         }else{
             $task->image = null;
