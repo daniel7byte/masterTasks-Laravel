@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="css/flatly.min.css" rel="stylesheet">
+    <link href="/css/flatly.min.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
