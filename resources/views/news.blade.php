@@ -14,14 +14,16 @@
                                         @if ($task->image == null)
                                             <span class="label label-warning">NULL</span>
                                         @else
-                                            <img style="" class="img img-responsive img-thumbnail" src="imagesTasks/{{ $task->image }}">
+                                            <a href="imagesTasks/{{ $task->image }}" target="_blank" title="{{ $task->title }}">
+                                                <img class="img img-responsive img-thumbnail" src="imagesTasks/{{ $task->image }}"alt="{{ $task->title }}">
+                                            </a>
                                         @endif
                                         <div class="caption">
                                             <h3>{{ $task->title }}</h3>
-                                            <p>Description: {{ $task->description }}</p>
-                                            <p>Date: {{ \Carbon\Carbon::parse($task->date)->toDayDateTimeString() }}</p>
-                                            <p>User: <span class="label label-default">{{ $task->user->first_name }}</span></p>
-                                            <p>Created ago: {{ \Carbon\Carbon::parse($task->created_at)->diffForHumans() }}</p>
+                                            <p><strong>Description: </strong>{{ $task->description }}</p>
+                                            <p><strong>Date: </strong>{{ \Carbon\Carbon::parse($task->date)->toDayDateTimeString() }}</p>
+                                            <p><strong>User: </strong><span class="label label-default">{{ $task->user->first_name }}</span></p>
+                                            <p><strong>Created ago: </strong>{{ \Carbon\Carbon::parse($task->created_at)->diffForHumans() }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -32,14 +34,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function () {
-            $(".img").elevateZoom({
-                zoomType: "inner",
-                cursor: "crosshair"
-            });
-        });
-    </script>
-
 @endsection
