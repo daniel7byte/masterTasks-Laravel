@@ -9,7 +9,7 @@
                     <div class="panel-body">
                         <div class="row">
                             @foreach($tasks as $task)
-                                <div class="col-sm-6 col-md-4">
+                                <div class="col-sm-6 col-md-6">
                                     <div class="thumbnail">
                                         @if ($task->image == null)
                                             <span class="label label-warning">NULL</span>

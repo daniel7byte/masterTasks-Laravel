@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="http://bootswatch.com/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="css/flatly.min.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -43,14 +43,14 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
 
-                    @if (!Auth::guest())
-                        <!-- Left Side Of Navbar -->
-                        <ul class="nav navbar-nav">
-                            <li><a href="{{ url('/news') }}">Last News</a></li>
+                    <!-- Left Side Of Navbar -->
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/news') }}">Last News</a></li>
+                        @if (!Auth::guest())
                             <li><a href="{{ url('/tasks') }}">My Tasks</a></li>
                             <li><a href="{{ url('/tasks/create') }}">Create Task</a></li>
-                        </ul>
-                    @endif
+                        @endif
+                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
