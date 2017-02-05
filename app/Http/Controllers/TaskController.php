@@ -59,10 +59,20 @@ class TaskController extends Controller
 
         $img = $request->file('image');
 
-        if($img != null){
-            $file_route = time() . '_' . $img->getClientOriginalName();
-            Storage::disk('imagesTasks')->put($file_route, \File::get($img));
-            $task->image = $file_route;
+        $strFlash = 'Task Created';
+        $strStatus = 'success';
+
+        if ($img != null) {
+            if ($img->getError() == 0) {
+
+                $file_route = time() . '_' . $img->getClientOriginalName();
+                Storage::disk('imagesTasks')->put($file_route, \File::get($img));
+                $task->image = $file_route;
+
+            } elseif($img->getError() == 1) {
+                $strFlash = $img->getErrorMessage();
+                $strStatus = 'warning';
+            }
         }else{
             $task->image = null;
         }
@@ -70,8 +80,7 @@ class TaskController extends Controller
         $task->user_id = $request->user()->id;
 
         $task->save();
-
-        return redirect('/tasks')->with('success', 'Task Created');
+        return redirect('/tasks')->with($strStatus, $strFlash);
     }
 
     /**
@@ -93,16 +102,13 @@ class TaskController extends Controller
      */
     public function edit(Request $request, Task $task)
     {
-        if($request->user()->role == "ADMIN"){
-            return view('tasks.edit', [
-                'task' => $task
-            ]);
-        }else{
+        if($request->user()->role != "ADMIN"){
             $this->authorize('owner', $task);
-            return view('tasks.edit', [
-                'task' => $task,
-            ]);
         }
+
+        return view('tasks.edit', [
+            'task' => $task
+        ]);
     }
 
     /**
@@ -114,56 +120,42 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
-        if($request->user()->role == "ADMIN"){
-
-            $task = Task::find($request->task->id);
-
-            $task->title = $request->title;
-            $task->description = $request->description;
-            $task->date = $request->date;
-
-            $img = $request->file('image');
-
-            if($img != null){
-                $exists = Storage::disk('imagesTasks')->exists($task->image);
-                if($exists){
-                    Storage::disk('imagesTasks')->delete($task->image);
-                }
-                $file_route = time() . '_' . $img->getClientOriginalName();
-                Storage::disk('imagesTasks')->put($file_route, \File::get($img));
-                $task->image = $file_route;
-            }
-
-            $task->user_id = $request->user()->id;
-
-            $task->save();
-            return redirect('/tasks')->with('success', 'Task Edited');
-        }else{
+        if($request->user()->role != "ADMIN"){
             $this->authorize('owner', $task);
+        }
 
-            $task = Task::find($request->task->id);
+        $task = Task::find($request->task->id);
 
-            $task->title = $request->title;
-            $task->description = $request->description;
-            $task->date = $request->date;
+        $task->title = $request->title;
+        $task->description = $request->description;
+        $task->date = $request->date;
 
-            $img = $request->file('image');
+        $img = $request->file('image');
 
-            if($img != null){
+        $strFlash = 'Task Edited';
+        $strStatus = 'success';
+
+        if ($img != null) {
+            if ($img->getError() == 0) {
+
                 $exists = Storage::disk('imagesTasks')->exists($task->image);
-                if($exists){
+                if ($exists) {
                     Storage::disk('imagesTasks')->delete($task->image);
                 }
                 $file_route = time() . '_' . $img->getClientOriginalName();
                 Storage::disk('imagesTasks')->put($file_route, \File::get($img));
                 $task->image = $file_route;
+
+            } elseif($img->getError() == 1) {
+                $strFlash = $img->getErrorMessage();
+                $strStatus = 'warning';
             }
-
-            $task->user_id = $request->user()->id;
-
-            $task->save();
-            return redirect('/tasks')->with('success', 'Task Edited');
         }
+
+        $task->user_id = $request->user()->id;
+
+        $task->save();
+        return redirect('/tasks')->with($strStatus, $strFlash);
     }
 
     /**
@@ -174,25 +166,16 @@ class TaskController extends Controller
      */
     public function destroy(Request $request, Task $task)
     {
-        if($request->user()->role == "ADMIN"){
-            if($task->image != null){
-                $exists = Storage::disk('imagesTasks')->exists($task->image);
-                if($exists){
-                    Storage::disk('imagesTasks')->delete($task->image);
-                }
-            }
-            $task->delete();
-            return redirect('/tasks')->with('success', 'Task Deleted');
-        }else{
+        if($request->user()->role != "ADMIN"){
             $this->authorize('owner', $task);
-            if($task->image != null){
-                $exists = Storage::disk('imagesTasks')->exists($task->image);
-                if($exists){
-                    Storage::disk('imagesTasks')->delete($task->image);
-                }
-            }
-            $task->delete();
-            return redirect('/tasks')->with('success', 'Task Deleted');
         }
+        if($task->image != null){
+            $exists = Storage::disk('imagesTasks')->exists($task->image);
+            if($exists){
+                Storage::disk('imagesTasks')->delete($task->image);
+            }
+        }
+        $task->delete();
+        return redirect('/tasks')->with('success', 'Task Deleted');
     }
 }
