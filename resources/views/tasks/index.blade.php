@@ -29,7 +29,7 @@
                                     @can('owner', $task)
                                     <tr>
                                         <td>{{ $task->title }}</td>
-                                        <td>{{ $task->description }}</td>
+                                        <td>{!! $task->description !!}</td>
                                         <td>{{ \Carbon\Carbon::parse($task->date)->toDayDateTimeString() }}</td>
                                         <td>
                                             @if ($task->image == null)

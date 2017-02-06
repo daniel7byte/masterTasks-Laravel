@@ -20,7 +20,7 @@
                                         @endif
                                         <div class="caption">
                                             <h3>{{ $task->title }}</h3>
-                                            <p><strong>Description: </strong>{{ $task->description }}</p>
+                                            <p><strong>Description: </strong>{!! $task->description !!}</p>
                                             <p><strong>Date: </strong>{{ \Carbon\Carbon::parse($task->date)->toDayDateTimeString() }}</p>
                                             <p><strong>User: </strong><span class="label label-default">{{ $task->user->first_name }}</span></p>
                                             <p><strong>Created ago: </strong>{{ \Carbon\Carbon::parse($task->created_at)->diffForHumans() }}</p>
