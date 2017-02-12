@@ -15,7 +15,7 @@
 
                             <div class="form-group">
                                 {!! Form::label('date', 'Date: ') !!}
-                                <input type="datetime-local" class="form-control" id="date" name="date" value="{{ \Carbon\Carbon::parse($task->date)->format('Y-m-d') }}T{{ \Carbon\Carbon::parse($task->date)->format('h:m') }}">
+                                <input type="datetime-local" class="form-control" id="date" name="date" value="{{ \Carbon\Carbon::parse($task->date)->format('Y-m-d') }}T{{ \Carbon\Carbon::parse($task->date)->format('h:i') }}">
                             </div>
 
                             {!! Form::submit('Save', ['class' => 'btn btn-success']) !!}

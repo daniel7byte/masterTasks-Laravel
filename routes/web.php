@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('/login', 301);
+    return redirect('/news', 301);
 });
 
 Auth::routes();
